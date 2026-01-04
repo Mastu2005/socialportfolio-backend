@@ -29,7 +29,14 @@ const cors = require("cors");
 const app = express();//server
 
 // middleware to read JSON
-app.use(cors());
+app.use(cors({
+  origin: [
+    "http://localhost:5500",
+    "https://your-project.vercel.app"
+  ],
+  credentials: true
+}));
+
 app.use(express.json());
 
 // test route
@@ -724,5 +731,5 @@ app.get("/users", async (req, res) => {
 
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on https://socialportfolio-backend.onrender.com/`);
 });
