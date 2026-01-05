@@ -42,18 +42,25 @@ const app = express();//server
 
 app.use(cors({
     origin: function (origin, callback) {
-        const allowedOrigins = [
-            "http://localhost:5500",
-            "http://localhost:3000",
-            "https://socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app" // 👈 EXACT Vercel URL
-        ];
+        // allow server-to-server & tools
+        if (!origin) return callback(null, true);
 
-        // allow requests with no origin (Postman, curl)
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed by CORS"));
+        // allow localhost
+        if (
+            origin.startsWith("http://localhost")
+        ) {
+            return callback(null, true);
         }
+
+        // allow all vercel deployments
+        if (
+            origin.endsWith(".vercel.app")
+        ) {
+            return callback(null, true);
+        }
+
+        // otherwise block
+        return callback(new Error("Not allowed by CORS"));
     },
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"]
