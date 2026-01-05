@@ -32,10 +32,16 @@ const app = express();//server
 app.use(cors({
   origin: [
     "http://localhost:5500",
-    "https://your-project.vercel.app"
+    "http://127.0.0.1:5500",
+    "socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app"
   ],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
+
+// IMPORTANT: allow preflight
+app.options("*", cors());
 
 app.use(express.json());
 
