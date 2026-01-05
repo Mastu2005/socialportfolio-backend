@@ -40,8 +40,6 @@ app.use(cors({
   credentials: true
 }));
 
-// IMPORTANT: handle preflight
-app.options("*", cors());
 
 app.use(express.json());
 
