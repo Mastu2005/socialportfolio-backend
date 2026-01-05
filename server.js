@@ -29,42 +29,42 @@ const cors = require("cors");
 const app = express();//server
 
 // middleware to read JSON
-// app.use(cors({
-//   origin: [
-//     "http://localhost:5500",
-//     "http://127.0.0.1:5500",
-//     "https://socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app"
-//   ],
-//   methods: ["GET", "POST", "PUT", "DELETE"],
-//   allowedHeaders: ["Content-Type", "Authorization"],
-//   credentials: true
-// }));
-
 app.use(cors({
-    origin: function (origin, callback) {
-        // allow server-to-server & tools
-        if (!origin) return callback(null, true);
-
-        // allow localhost
-        if (
-            origin.startsWith("http://localhost")
-        ) {
-            return callback(null, true);
-        }
-
-        // allow all vercel deployments
-        if (
-            origin.endsWith(".vercel.app")
-        ) {
-            return callback(null, true);
-        }
-
-        // otherwise block
-        return callback(new Error("Not allowed by CORS"));
-    },
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"]
+  origin: [
+    "http://localhost:5500",
+    "http://127.0.0.1:5500",
+    "https:socialportfolio-frontend.vercel.app"
+  ],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
 }));
+
+// app.use(cors({
+//     origin: function (origin, callback) {
+//         // allow server-to-server & tools
+//         if (!origin) return callback(null, true);
+
+//         // allow localhost
+//         if (
+//             origin.startsWith("http://localhost")
+//         ) {
+//             return callback(null, true);
+//         }
+
+//         // allow all vercel deployments
+//         if (
+//             origin.endsWith(".vercel.app")
+//         ) {
+//             return callback(null, true);
+//         }
+
+//         // otherwise block
+//         return callback(new Error("Not allowed by CORS"));
+//     },
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"]
+// }));
 
 app.use(express.json());
 
