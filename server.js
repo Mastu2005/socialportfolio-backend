@@ -35,13 +35,10 @@ app.use(cors({
     "http://127.0.0.1:5500",
     "https://socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
-
-// 👇 THIS LINE IS CRITICAL
-app.options("*", cors());
 
 app.use(express.json());
 
