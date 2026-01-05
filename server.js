@@ -40,6 +40,8 @@ app.use(cors({
   credentials: true
 }));
 
+// 👇 THIS LINE IS CRITICAL
+app.options("*", cors());
 
 app.use(express.json());
 
