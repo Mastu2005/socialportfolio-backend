@@ -35,36 +35,13 @@ app.use(cors({
     "http://127.0.0.1:5500",
     "https:socialportfolio-frontend.vercel.app"
   ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
 }));
 
-// app.use(cors({
-//     origin: function (origin, callback) {
-//         // allow server-to-server & tools
-//         if (!origin) return callback(null, true);
-
-//         // allow localhost
-//         if (
-//             origin.startsWith("http://localhost")
-//         ) {
-//             return callback(null, true);
-//         }
-
-//         // allow all vercel deployments
-//         if (
-//             origin.endsWith(".vercel.app")
-//         ) {
-//             return callback(null, true);
-//         }
-
-//         // otherwise block
-//         return callback(new Error("Not allowed by CORS"));
-//     },
-//     methods: ["GET", "POST", "PUT", "DELETE"],
-//     allowedHeaders: ["Content-Type", "Authorization"]
-// }));
+// IMPORTANT: handle preflight
+app.options("*", cors());
 
 app.use(express.json());
 
