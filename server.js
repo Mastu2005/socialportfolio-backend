@@ -29,15 +29,34 @@ const cors = require("cors");
 const app = express();//server
 
 // middleware to read JSON
+// app.use(cors({
+//   origin: [
+//     "http://localhost:5500",
+//     "http://127.0.0.1:5500",
+//     "https://socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app"
+//   ],
+//   methods: ["GET", "POST", "PUT", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+//   credentials: true
+// }));
+
 app.use(cors({
-  origin: [
-    "http://localhost:5500",
-    "http://127.0.0.1:5500",
-    "https://socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app"
-  ],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-  credentials: true
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            "http://localhost:5500",
+            "http://localhost:3000",
+            "https://socialportfolio-frontend-i7ce1agsw-mastu2005s-projects.vercel.app" // 👈 EXACT Vercel URL
+        ];
+
+        // allow requests with no origin (Postman, curl)
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.use(express.json());
